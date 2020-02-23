@@ -1,6 +1,6 @@
 namespace = cultural_influence_coptic
 #Literal Ancient Egypt Lmao
-#Hardcoded to only permit Coptic Egyptians to do this
+#Hardcoded to only permit Coptic Egyptians or Hellenics with the Coptic restoration flag active to do this
 
 province_event = { #Coptic spread along the Nile
 	id = cultural_influence_coptic.1
@@ -9,9 +9,16 @@ province_event = { #Coptic spread along the Nile
 	picture = CULTURE_eventPicture
 
 	trigger = {
-		owner = { culture_group = egyptian_group }
+		OR = {
+			owner = { culture_group = egyptian_group }
+			has_global_flag = hellenic_coptic_restoration_flag
+		}	
 		NOT = { culture = coptic_culture }
-		religion = coptic
+		NOT = { has_global_flag = hellenic_coptic_assimilation_flag }
+		OR = { 
+			religion = coptic 
+			has_global_flag = hellenic_coptic_restoration_flag
+		}
 		OR = {
 			development = 10 #To prevent Sahara converting
 			and = {
