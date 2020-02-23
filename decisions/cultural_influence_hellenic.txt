@@ -1,0 +1,966 @@
+country_decisions = {
+
+	hellenic_settlements_decision = {
+		major = yes
+		potential = {
+			NOT = { has_country_modifier = hellenic_settlements }
+			culture_group = byzantine
+		}
+
+		allow = {
+			total_development = 1000
+		}
+
+		effect = {
+			add_country_modifier = {
+				name = hellenic_settlements
+				duration = -1
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	hellenic_aegean_resettlement_decision = {
+		major = yes
+		potential = {
+			AND = {
+				culture_group = byzantine
+				any_owned_province = { agaio_culture_region = yes }	
+			}
+			NOT = { has_global_flag = hellenic_aegean_settlement_flag }	
+			has_global_flag = constantinople_restored
+		}
+		allow = {				
+			adm_power = 200
+			dip_power = 100
+			owns_core_province = 7104 #You own it at start, so if you lost it you're either doing some weird play or you died... probably the latter
+		}
+		effect = {
+			7104 = { change_culture = greek }
+			set_global_flag = hellenic_aegean_settlement_flag
+			custom_tooltip = hellenic_region_settlement
+			add_adm_power = -200
+			add_dip_power = -100
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	hellenic_eastern_black_sea_resettlement_decision = {
+		major = yes
+		potential = {
+			AND = {
+				culture_group = byzantine
+				any_owned_province = { pontic_greek_culture_region = yes }	
+			}
+			NOT = { has_global_flag = hellenic_eastern_black_sea_settlement_flag }
+			has_global_flag = constantinople_restored
+		}
+		allow = {
+			adm_power = 200
+			dip_power = 100
+			owns_core_province = 328
+		}
+		effect = {
+			set_global_flag = hellenic_eastern_black_sea_settlement_flag
+			328 = { change_culture = pontic_greek }
+			custom_tooltip = hellenic_region_settlement
+			add_adm_power = -200
+			add_dip_power = -100
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}	
+
+	hellenic_cappadocia_resettlement_decision = {
+		major = yes
+		potential = {
+			AND = {
+				culture_group = byzantine
+				any_owned_province = {
+					cappadocian_culture_region = yes
+				}	
+			}
+			NOT = { has_global_flag = hellenic_cappadocia_settlement_flag }
+			has_global_flag = constantinople_restored	
+		}
+		allow = {					
+			adm_power = 200
+			dip_power = 100
+			owns_core_province = 323
+		}
+		effect = {
+			set_global_flag = hellenic_cappadocia_settlement_flag
+			323 = { change_culture = cappadocian } 
+			custom_tooltip = hellenic_region_settlement
+			add_adm_power = -200
+			add_dip_power = -100
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}			
+	
+	rhomaio_unification_decision = {
+		major = yes
+		potential = {
+			has_country_modifier = hellenic_settlements
+			has_global_flag = hellenic_eastern_black_sea_settlement_flag
+			has_global_flag = hellenic_aegean_settlement_flag
+			has_global_flag = hellenic_cappadocia_settlement_flag
+		}
+
+		allow = {
+			151 = {
+				has_province_modifier = byz_city_of_cities
+			}
+			148 = {
+				has_province_modifier = byz_co_capital
+			}
+			any_owned_province = {
+				has_province_modifier = byz_anatolian_restoration
+			}
+			NOT = { has_global_flag = rhomaio_unified_flag }
+			AND = {
+				anatolia_region = {	
+   					culture_group = byzantine	
+    					type = all	
+				}
+				romain_culture_region = { 
+   					culture_group = byzantine	
+    					type = all		
+				}
+			}	
+		}
+
+		effect = {
+			country_event = { id = cultural_influence_greek.15 }
+			set_global_flag = rhomaio_unified_flag
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+	}	
+
+	hellenic_armenian_assimilation_decision = {
+		major = yes
+		potential = {
+			AND = {
+				culture_group = byzantine
+				OR = {
+					calc_true_if = {
+						all_province = {
+							OR = {
+								culture = armenian
+								}
+							is_core = ROOT
+						}
+					amount = 1 #Have to own at least one to see the decision						
+					}
+				}	
+			}
+			NOT = { has_global_flag = hellenic_armenian_assimilation_flag }
+			has_country_modifier = hellenic_settlements
+		}
+		allow = {
+			has_accepted_culture = armenian
+			has_country_modifier = byz_armenian_auxillaries
+			adm_power = 200
+			dip_power = 100
+		}
+		effect = {
+			set_global_flag = hellenic_armenian_assimilation_flag
+			custom_tooltip = enables_hellenisation_of_armenian
+			hellenic_armenian_assimilation = yes
+			add_adm_power = -200
+			add_dip_power = -100
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	hellenic_coptic_restoration_decision = {
+		major = yes
+		potential = {
+			AND = {
+				OR = {
+					culture_group = byzantine
+				}
+				owns_core_province = 358
+			}
+			NOT = { has_global_flag = hellenic_coptic_restoration_flag }
+			has_country_modifier = hellenic_settlements			
+		}
+		allow = {
+			AND = {
+				OR = {
+					calc_true_if = {
+						all_province = {
+							OR = {
+								region = egypt_region
+							}	
+						is_core = ROOT
+						}
+					amount = 10					
+					}
+				}			
+			}
+			adm_power = 200
+			dip_power = 100
+		}
+		effect = {
+			358 = { change_culture = coptic_culture }
+			add_accepted_culture = coptic_culture
+			set_global_flag = hellenic_coptic_restoration_flag
+			custom_tooltip = enables_coptic_spread_hellenic
+			hellenic_coptic_restoration = yes
+			add_adm_power = -200
+			add_dip_power = -100
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}			
+	
+	hellenic_coptic_assimilation_decision = {
+		major = yes
+		potential = {
+			has_global_flag = hellenic_coptic_restoration_flag
+			AND = {
+				OR = {
+					culture_group = byzantine
+				}
+				OR = {
+					calc_true_if = {
+						all_province = {
+							OR = {
+								culture = coptic_culture
+								}
+							is_core = ROOT
+						}
+					amount = 1 #Have to own at least one to see the decision						
+					}
+				}	
+			}
+			NOT = { has_global_flag = hellenic_coptic_assimilation_flag }		
+			has_country_modifier = hellenic_settlements		
+		}
+		allow = {
+			AND = {
+				OR = {
+					calc_true_if = {
+						all_province = {
+							AND = {
+								culture = coptic_culture
+								NOT = { nationalism = 1 }
+							}	
+						is_core = ROOT
+						}
+					amount = 15					
+					}
+				}
+			}
+			has_global_flag = east_oriental_schism_healed
+			adm_power = 200
+			dip_power = 100
+			has_accepted_culture = coptic_culture
+		}
+		effect = {
+			set_global_flag = hellenic_coptic_assimilation_flag
+			custom_tooltip = enables_coptic_assimilation_hellenic
+			hellenic_coptic_assimilation = yes
+			add_prestige = 25
+			add_adm_power = -200
+			add_dip_power = -100
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	hellenic_turkish_assimilation_decision = {
+		major = yes
+		potential = {
+			AND = {
+				culture_group = byzantine
+				OR = {
+					calc_true_if = {
+						all_province = {
+							AND = {
+								culture = turkish
+							}
+							is_core = ROOT
+						}
+					amount = 1 #Have to own at least one to see the decision						
+					}
+				}
+			}
+			NOT = { has_global_flag = hellenic_turkish_assimilation_flag }
+			has_country_modifier = hellenic_settlements	
+			has_accepted_culture = turkish
+		}
+		allow = {
+			AND = {
+				OR = {
+					calc_true_if = {
+						all_province = {
+							AND = {
+								culture = turkish
+								NOT = { nationalism = 1 }
+							}	
+						is_core = ROOT
+						}
+					amount = 30					
+					}
+				}			
+			}
+			any_owned_province = { has_province_modifier = byz_anatolian_restoration } 
+			adm_power = 200
+			dip_power = 100
+		}
+		effect = {
+			set_global_flag = hellenic_turkish_assimilation_flag
+			custom_tooltip = turkish_assimilation_hellenic
+			hellenic_turkish_assimilation = yes
+			add_adm_power = -200
+			add_dip_power = -100
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}	
+	
+	hellenic_romanian_assimilation_decision = {
+		major = yes
+		potential = {
+			AND = {
+				culture_group = byzantine
+				any_province = {
+					dacion_culture_region = yes
+					owner = {
+						OR = {
+							is_byz_or_hellenic_rome_trigger = yes
+							is_subject_of = ROOT
+						}
+					}	
+				}	
+			}
+			NOT = { has_global_flag = hellenic_romanian_assimilation_flag }
+			has_country_modifier = hellenic_settlements			
+		}
+		allow = {
+			AND = {
+				OR = {
+					calc_true_if = {
+						all_province = {
+							AND = {
+								culture = romanian
+								NOT = { nationalism = 1 }
+							}	
+						is_core = DAC
+						}
+					amount = 25				
+					}
+				}			
+			}
+			has_country_flag = established_march_dacia
+			adm_power = 200
+			dip_power = 100
+		}
+		effect = {
+			set_global_flag = hellenic_romanian_assimilation_flag
+			custom_tooltip = romanian_assimilation_hellenic
+			hellenic_romanian_assimilation = yes
+			add_prestige = 25
+			add_adm_power = -200
+			add_dip_power = -100
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	hellenic_illyria_settlement = {
+		major = yes
+		potential = {
+			culture_group = byzantine
+			owns_or_non_sovereign_subject_of = 137			
+			NOT = { has_global_flag = hellenic_illyria_settlement_flag }
+			has_country_modifier = hellenic_settlements			
+		}
+		allow = {
+			has_country_modifier = byz_balkan_hegemony
+			adm_power = 200
+			dip_power = 100
+		}
+		effect = {
+			set_global_flag = hellenic_illyria_settlement_flag
+			custom_tooltip = hellenic_region_settlement
+			137 = { change_culture = illyrion }
+			add_prestige = 25
+			add_adm_power = -200
+			add_dip_power = -100
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	hellenic_north_italy_settlement = {
+		major = yes
+		potential = {
+			culture_group = byzantine
+			owns_or_non_sovereign_subject_of = 114		
+			NOT = { has_global_flag = hellenic_north_italy_settlement_flag }
+			has_country_modifier = hellenic_settlements		
+			OR = {
+				has_global_flag = hellenic_illyria_settlement_flag
+				has_global_flag = hellenic_south_italy_settlement_flag
+			}	
+		}
+		allow = {				
+			has_country_modifier = byz_italy_restored
+			adm_power = 200
+			dip_power = 100
+		}
+		effect = {
+			set_global_flag = hellenic_north_italy_settlement_flag
+			custom_tooltip = hellenic_region_settlement
+			114 = { change_culture = italiote }
+			add_prestige = 25
+			add_adm_power = -200
+			add_dip_power = -100
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	hellenic_south_italy_settlement = {
+		major = yes
+		potential = {
+			culture_group = byzantine
+			NOT = { has_global_flag = hellenic_south_italy_settlement_flag }
+			has_country_modifier = hellenic_settlements
+			owns_or_non_sovereign_subject_of = 121		
+		}
+		allow = {
+			OR = {
+				has_country_modifier = byz_greater_greece_greek
+				has_country_modifier = byz_italy_restored
+			}
+			adm_power = 200
+			dip_power = 100
+		}
+		effect = {
+			set_global_flag = hellenic_south_italy_settlement_flag
+			custom_tooltip = hellenic_region_settlement
+			121 = { change_culture = griko }
+			add_prestige = 25
+			add_adm_power = -200
+			add_dip_power = -100
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	hellenic_levant_settlement = {
+		major = yes
+		potential = {
+			culture_group = byzantine
+			NOT = { has_global_flag = hellenic_levant_settlement_flag }
+			has_country_modifier = hellenic_settlements	
+			owns_or_non_sovereign_subject_of = 2313
+		}	
+		allow = {
+			has_global_flag = east_oriental_schism_healed
+			adm_power = 200
+			dip_power = 100
+		}
+		effect = {
+			set_global_flag = hellenic_levant_settlement_flag
+			custom_tooltip = hellenic_region_settlement
+			2313 = { change_culture = anatolian }
+			add_prestige = 25
+			add_adm_power = -200
+			add_dip_power = -100
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	hellenic_cyrenaica_settlement = {
+		major = yes
+		potential = {
+			culture_group = byzantine
+			NOT = { has_global_flag = hellenic_cyrenaica_settlement_flag }
+			has_country_modifier = hellenic_settlements	
+			has_global_flag = hellenic_coptic_assimilation_flag
+			owns_or_non_sovereign_subject_of = 356			
+		}
+		allow = {
+			adm_power = 200
+			dip_power = 100
+		}
+		effect = {
+			set_global_flag = hellenic_cyrenaica_settlement_flag
+			custom_tooltip = hellenic_region_settlement
+			356 = { change_culture = kirenike }
+			add_prestige = 25
+			add_adm_power = -200
+			add_dip_power = -100
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	hellenic_carthage_settlement = {
+		major = yes
+		potential = {
+			culture_group = byzantine
+			NOT = { has_global_flag = hellenic_carthage_settlement_flag }
+			has_country_modifier = hellenic_settlements	
+			owns_or_non_sovereign_subject_of = 341	
+		}
+		allow = {
+			adm_power = 200
+			dip_power = 100
+			OR = {
+				has_global_flag = east_west_schism_healed
+				has_global_flag = hellenic_cyrenaica_settlement_flag 
+			}			
+		}
+		effect = {
+			set_global_flag = hellenic_carthage_settlement_flag
+			custom_tooltip = hellenic_region_settlement
+			341 = { change_culture = karchidoniac }
+			add_adm_power = -200
+			add_dip_power = -100
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	hellenic_arabia_settlement = {
+		major = yes
+		potential = {
+			culture_group = byzantine
+			any_owned_province = { aravikos_culture_region = yes }
+			NOT = { has_global_flag = hellenic_arabia_settlement_flag }
+			has_country_modifier = hellenic_settlements				
+		}
+		allow = {
+			owns_or_non_sovereign_subject_of =  385
+			385 = { has_province_modifier = patriarch_mecca_medina }
+			adm_power = 200
+			dip_power = 100
+		}
+		effect = {
+			set_global_flag = hellenic_arabia_settlement_flag
+			custom_tooltip = hellenic_region_settlement
+			385 = { change_culture = aravikos }
+			add_adm_power = -200
+			add_dip_power = -100
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	hellenic_persia_settlement = {
+		major = yes
+		potential = {
+			AND = {
+				culture_group = byzantine
+				OR = {
+					any_owned_province = { persic_culture_region = yes }
+					has_country_flag = established_exarch_persis
+				}	
+			}
+			OR = {
+				has_global_flag = hellenic_armenian_assimilation_flag
+				has_global_flag = hellenic_levant_settlement_flag
+				has_global_flag = hellenic_arabia_settlement_flag
+			}	
+			NOT = { has_global_flag = hellenic_persia_settlement_flag }
+			has_country_modifier = hellenic_settlements				
+		}
+		allow = {
+			adm_power = 200
+			dip_power = 100
+			owns_or_non_sovereign_subject_of = 2218
+		}
+		effect = {
+			set_global_flag = hellenic_persia_settlement_flag
+			custom_tooltip = hellenic_region_settlement
+			2218 = { change_culture = persic }
+			add_adm_power = -200
+			add_dip_power = -100
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	hellenic_bactria_settlement = {
+		major = yes
+		potential = {
+			culture_group = byzantine
+			NOT = { has_global_flag = hellenic_bactria_settlement_flag }
+			has_country_modifier = hellenic_settlements	
+			has_global_flag = hellenic_persia_settlement_flag
+			OR = {
+				any_owned_province = { vaktrianos_culture_region = yes }
+				has_country_flag = established_exarch_persis 
+			}	
+		}
+		allow = {
+			adm_power = 200
+			dip_power = 100
+			owns_or_non_sovereign_subject_of = 450
+		}
+		effect = {
+			set_global_flag = hellenic_bactria_settlement_flag
+			custom_tooltip = hellenic_region_settlement
+			add_adm_power = -200
+			add_dip_power = -100
+			450 = { change_culture = vaktrianos }
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	hellenic_west_india_settlement = {
+		major = yes
+		potential = {
+			culture_group = byzantine
+			any_owned_province = { indiki_koilada_culture_region = yes }
+			NOT = { has_global_flag = hellenic_west_india_settlement_flag }
+			has_country_modifier = hellenic_settlements	
+			has_global_flag = hellenic_bactria_settlement_flag
+		}
+		allow = {
+			adm_power = 200
+			dip_power = 100
+			owns_or_non_sovereign_subject_of = 504
+		}
+		effect = {
+			set_global_flag = hellenic_west_india_settlement_flag
+			custom_tooltip = hellenic_region_settlement
+			add_adm_power = -200
+			add_dip_power = -100
+			504 = { change_culture = indiki_koilada }
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}		
+
+	hellenic_mauretania_settlement = {
+		major = yes
+		potential = {
+			culture_group = byzantine
+			any_owned_province = { mavritanias_culture_region = yes }
+			NOT = { has_global_flag = hellenic_mauretania_settlement_flag }
+			has_country_modifier = hellenic_settlements	
+			has_global_flag = hellenic_carthage_settlement_flag 
+		}
+		allow = {
+			adm_power = 200
+			dip_power = 100
+			owns_or_non_sovereign_subject_of = 1751
+		}
+		effect = {
+			set_global_flag = hellenic_mauretania_settlement_flag
+			custom_tooltip = hellenic_region_settlement
+			add_adm_power = -200
+			add_dip_power = -100
+			1751 = { change_culture = mavritanias }
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	hellenic_west_mediterranean_settlement = {
+		major = yes
+		potential = {
+			culture_group = byzantine
+			any_owned_province = { massalian_culture_region = yes }
+			NOT = { has_global_flag = hellenic_west_mediterranean_settlement_flag }
+			has_country_modifier = hellenic_settlements	
+			OR = {
+				has_global_flag = hellenic_carthage_settlement_flag 
+				has_global_flag = hellenic_north_italy_settlement_flag
+			}
+		}
+		allow = {
+			owns_or_non_sovereign_subject_of = 201
+			adm_power = 200
+			dip_power = 100
+		}
+		effect = {
+			201 = { change_culture = massalian }
+			set_global_flag = hellenic_west_mediterranean_settlement_flag
+			custom_tooltip = hellenic_region_settlement		
+			add_adm_power = -200
+			add_dip_power = -100
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	hellenic_south_iberia_settlement = {
+		major = yes
+		potential = {
+			culture_group = byzantine
+			OR = {
+				any_owned_province = { karpessosion_culture_region = yes }
+				has_country_flag = established_exarch_hesperia
+			}	
+			NOT = { has_global_flag = hellenic_south_iberia_settlement_flag }
+			has_country_modifier = hellenic_settlements	
+			OR = {
+				has_global_flag = hellenic_west_mediterranean_settlement_flag 
+				has_global_flag = hellenic_mauretania_settlement_flag
+			}
+		}
+		allow = {
+			adm_power = 200
+			dip_power = 100
+			owns_or_non_sovereign_subject_of = 3099
+		}
+		effect = {
+			set_global_flag = hellenic_south_iberia_settlement_flag
+			custom_tooltip = hellenic_region_settlement		
+			add_adm_power = -200
+			add_dip_power = -100
+			3099 = { change_culture = hesperic }
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}	
+	
+	hellenic_north_iberia_settlement = {
+		major = yes
+		potential = {
+			culture_group = byzantine
+			OR = {
+				any_owned_province = { septimanikion_culture_region = yes }
+				has_country_flag = established_exarch_hesperia
+			}
+			NOT = { has_global_flag = hellenic_north_iberia_settlement_flag }
+			has_country_modifier = hellenic_settlements	
+			OR = {
+				has_global_flag = hellenic_west_mediterranean_settlement_flag 
+				has_global_flag = hellenic_south_iberia_settlement_flag
+			}
+		}
+		allow = {
+			adm_power = 200
+			dip_power = 100
+			owns_or_non_sovereign_subject_of = 215
+		}
+		effect = {
+			set_global_flag = hellenic_north_iberia_settlement_flag
+			custom_tooltip = hellenic_region_settlement		
+			add_adm_power = -200
+			add_dip_power = -100
+			215 = { change_culture = septimanikion }
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}	
+	
+	hellenic_south_france_settlement = {
+		major = yes
+		potential = {
+			culture_group = byzantine
+			NOT = { has_global_flag = hellenic_south_france_settlement_flag }
+			has_country_modifier = hellenic_settlements	
+			OR = {
+				has_global_flag = hellenic_west_mediterranean_settlement_flag 
+				has_global_flag = hellenic_north_iberia_settlement_flag
+			}
+			any_owned_province = { galatian_culture_region = yes }
+		}
+		allow = {
+			adm_power = 200
+			dip_power = 100
+			owns_or_non_sovereign_subject_of = 174	
+		}
+		effect = {
+			set_global_flag = hellenic_south_france_settlement_flag
+			custom_tooltip = hellenic_region_settlement		
+			add_adm_power = -200
+			add_dip_power = -100
+			174 = { change_culture = galatian }
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}	
+	
+	hellenic_north_france_settlement = {
+		major = yes
+		potential = {
+			culture_group = byzantine
+			NOT = { has_global_flag = hellenic_north_france_settlement_flag }
+			has_country_modifier = hellenic_settlements	
+			OR = {
+				has_global_flag = hellenic_south_france_settlement_flag 
+				has_global_flag = hellenic_south_germany_settlement_flag
+			}
+			any_owned_province = { velgoi_culture_region = yes }
+		}
+		allow = {
+			adm_power = 200
+			dip_power = 100
+			owns_or_non_sovereign_subject_of = 80
+		}
+		effect = {
+			set_global_flag = hellenic_north_france_settlement_flag
+			custom_tooltip = hellenic_region_settlement		
+			add_adm_power = -200
+			add_dip_power = -100
+			80 = ( change_culture = velgoi }
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	hellenic_britain_settlement = {
+		major = yes
+		potential = {
+			culture_group = byzantine
+			OR = {
+				any_owned_province = { albian_culture_region = yes }
+				has_country_flag = established_exarch_albion
+			}	
+			NOT = { has_global_flag = hellenic_britain_settlement_flag }
+			has_country_modifier = hellenic_settlements	
+			has_global_flag = hellenic_north_france_settlement_flag 
+		}
+		allow = {
+			adm_power = 200
+			dip_power = 100
+			owns_or_non_sovereign_subject_of = 236
+		}
+		effect = {
+			set_global_flag = hellenic_britain_settlement_flag
+			custom_tooltip = hellenic_region_settlement		
+			add_adm_power = -200
+			add_dip_power = -100
+			236 = { change_culture = albian }
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+
+	hellenic_ireland_settlement = {
+		major = yes
+		potential = {
+			culture_group = byzantine
+			NOT = { has_global_flag = hellenic_ireland_settlement_flag }
+			has_country_modifier = hellenic_settlements	
+			has_country_modifier = byz_empire_restored
+			OR = {
+				has_global_flag = hellenic_britain_settlement_flag 
+			}
+			any_owned_province = {
+				hibernian_culture_region = yes
+			}	
+		}
+		allow = {
+			adm_power = 200
+			dip_power = 100
+			owns_or_non_sovereign_subject_of = 373
+		}
+		effect = {
+			set_global_flag = hellenic_ireland_settlement_flag
+			custom_tooltip = hellenic_region_settlement		
+			add_adm_power = -200
+			add_dip_power = -100
+			373 = { change_culture = hibernian }
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	hellenic_pannonia_settlement = {
+		major = yes
+		potential = {
+			culture_group = byzantine
+			any_owned_province = { pannonion_culture_region = yes }
+			NOT = { has_global_flag = hellenic_pannonia_settlement_flag }
+			has_country_modifier = hellenic_settlements	
+			OR = {
+				has_global_flag = hellenic_romanian_assimilation_flag 
+				has_global_flag = hellenic_illyria_settlement_flag
+			}
+		}
+		allow = {
+			adm_power = 200
+			dip_power = 100
+			owns_or_non_sovereign_subject_of = 153
+		}
+		effect = {
+			set_global_flag = hellenic_pannonia_settlement_flag
+			custom_tooltip = hellenic_region_settlement		
+			add_adm_power = -200
+			add_dip_power = -100
+			153 = { change_culture = pannonion_culture_region }
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+	hellenic_south_western_germania_settlement = {
+		major = yes
+		potential = {
+			culture_group = byzantine
+			any_owned_province = {
+				notiodytiki_germanikos_culture_region = yes
+			}
+			NOT = { has_global_flag = hellenic_south_western_germania_settlement_flag }
+			has_country_modifier = hellenic_settlements	
+			OR = {
+				has_global_flag = hellenic_pannonia_settlement_flag 
+				has_global_flag = hellenic_north_italy_settlement_flag
+			}
+		}
+		allow = {
+			adm_power = 200
+			dip_power = 100
+		}
+		effect = {
+			set_global_flag = hellenic_south_western_germania_settlement_flag
+			custom_tooltip = hellenic_region_settlement		
+			add_adm_power = -200
+			add_dip_power = -100
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+	
+}
