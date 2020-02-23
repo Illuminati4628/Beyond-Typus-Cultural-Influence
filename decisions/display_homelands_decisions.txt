@@ -1,8 +1,49 @@
 country_decisions = { #Areas not otherwise mentioned via another Decision are shown here.
+	#Global Decision
+	show_homelands = {
+		major = no
+		potential = {
+			ai = no
+			NOT = { has_global_flag = homelands_shown_flag }	
+		}
+
+		allow = {
+			ai = no
+		}
+
+		effect = {
+			set_global_flag = homelands_shown_flag
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	hide_homelands = {
+		major = no
+		potential = {
+			ai = no
+			has_global_flag = homelands_shown_flag
+		}
+
+		allow = {
+			ai = no
+		}
+
+		effect = {
+			clr_global_flag = homelands_shown_flag			
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}	
+	#South Slavic
 	serbo_croat_homelands = {
 		major = no
 		potential = {
 			culture_group = south_slavic
+			has_global_flag = homelands_shown_flag
 		}
 
 		provinces_to_highlight = {
@@ -30,6 +71,7 @@ country_decisions = { #Areas not otherwise mentioned via another Decision are sh
 		major = no
 		potential = {
 			culture_group = south_slavic
+			has_global_flag = homelands_shown_flag			
 		}
 
 		provinces_to_highlight = {
@@ -56,6 +98,7 @@ country_decisions = { #Areas not otherwise mentioned via another Decision are sh
 		major = no
 		potential = {
 			culture_group = south_slavic
+			has_global_flag = homelands_shown_flag			
 		}
 
 		provinces_to_highlight = {
@@ -77,12 +120,13 @@ country_decisions = { #Areas not otherwise mentioned via another Decision are sh
 			factor = 0
 		}
 	}
-
+	#East Slavic
 	ruthenian_homelands = {
 		major = no
 		potential = {
 			culture_group = east_slavic
 			any_province = { culture = ruthenian }
+			has_global_flag = homelands_shown_flag			
 		}
 
 		provinces_to_highlight = {
@@ -107,6 +151,7 @@ country_decisions = { #Areas not otherwise mentioned via another Decision are sh
 		potential = {
 			culture_group = east_slavic
 			any_province = { culture = russian }
+			has_global_flag = homelands_shown_flag			
 		}
 
 		provinces_to_highlight = {
@@ -130,6 +175,7 @@ country_decisions = { #Areas not otherwise mentioned via another Decision are sh
 		major = no
 		potential = {
 			culture_group = east_slavic
+			has_global_flag = homelands_shown_flag
 		}
 
 		provinces_to_highlight = {
@@ -154,6 +200,7 @@ country_decisions = { #Areas not otherwise mentioned via another Decision are sh
 		potential = {
 			culture_group = east_slavic
 			NOT = { any_province = { culture = ruthenian } }
+			has_global_flag = homelands_shown_flag
 		}
 
 		provinces_to_highlight = {
@@ -178,6 +225,7 @@ country_decisions = { #Areas not otherwise mentioned via another Decision are sh
 		potential = {
 			culture_group = east_slavic
 			NOT = { any_province = { culture = ruthenian } }
+			has_global_flag = homelands_shown_flag
 		}
 
 		provinces_to_highlight = {
@@ -202,6 +250,7 @@ country_decisions = { #Areas not otherwise mentioned via another Decision are sh
 		potential = {
 			culture_group = east_slavic
 			NOT = { any_province = { culture = russian } }
+			has_global_flag = homelands_shown_flag
 		}
 
 		provinces_to_highlight = {
@@ -226,6 +275,7 @@ country_decisions = { #Areas not otherwise mentioned via another Decision are sh
 		potential = {
 			culture_group = east_slavic
 			NOT = { any_province = { culture = russian } }
+			has_global_flag = homelands_shown_flag
 		}
 
 		provinces_to_highlight = {
@@ -250,6 +300,7 @@ country_decisions = { #Areas not otherwise mentioned via another Decision are sh
 		potential = {
 			culture_group = east_slavic
 			NOT = { any_province = { culture = russian } }
+			has_global_flag = homelands_shown_flag
 		}
 
 		provinces_to_highlight = {
@@ -268,11 +319,12 @@ country_decisions = { #Areas not otherwise mentioned via another Decision are sh
 			factor = 0
 		}
 	}
-
+	#French
 	french_homelands = {
 		major = no
 		potential = {
 			culture_group = french
+			has_global_flag = homelands_shown_flag
 		}
 
 		provinces_to_highlight = {
@@ -291,11 +343,12 @@ country_decisions = { #Areas not otherwise mentioned via another Decision are sh
 			factor = 0
 		}
 	}
-
+	#West Slavic
 	polish_homelands = {
 		major = no
 		potential = {
 			culture_group = west_slavic
+			has_global_flag = homelands_shown_flag
 		}
 
 		provinces_to_highlight = {
@@ -319,6 +372,7 @@ country_decisions = { #Areas not otherwise mentioned via another Decision are sh
 		major = no
 		potential = {
 			culture_group = west_slavic
+			has_global_flag = homelands_shown_flag
 		}
 
 		provinces_to_highlight = {
@@ -342,6 +396,7 @@ country_decisions = { #Areas not otherwise mentioned via another Decision are sh
 		major = no
 		potential = {
 			culture_group = west_slavic
+			has_global_flag = homelands_shown_flag
 		}
 
 		provinces_to_highlight = {
@@ -365,6 +420,7 @@ country_decisions = { #Areas not otherwise mentioned via another Decision are sh
 		major = no
 		potential = {
 			culture_group = west_slavic
+			has_global_flag = homelands_shown_flag
 		}
 
 		provinces_to_highlight = {
@@ -383,11 +439,12 @@ country_decisions = { #Areas not otherwise mentioned via another Decision are sh
 			factor = 0
 		}
 	}
-
+	#Horde
 	nomadic_homelands = {
 		major = no
 		potential = {
 			is_nomad = yes
+			has_global_flag = homelands_shown_flag
 		}
 
 		provinces_to_highlight = {
@@ -406,4 +463,706 @@ country_decisions = { #Areas not otherwise mentioned via another Decision are sh
 			factor = 0
 		}
 	}
+	#Hellenic
+	agaio_homelands = {
+		major = no
+		potential = {
+			AND = {
+				culture_group = byzantine
+				NOT = { has_global_flag = rhomaio_formed_flag }
+			}
+			has_global_flag = homelands_shown_flag
+			has_global_flag = hellenic_aegean_settlement_flag
+		}
+
+		provinces_to_highlight = {
+			agaio_culture_region = yes 
+		}
+
+		allow = {
+			always = no
+		}
+
+		effect = {
+			#Pass
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	pontic_greek_homelands = {
+		major = no
+		potential = {
+			AND = {
+				culture_group = byzantine
+				NOT = { has_global_flag = rhomaio_formed_flag }
+			}
+			has_global_flag = homelands_shown_flag
+			has_global_flag = hellenic_eastern_black_sea_settlement_flag
+		}
+
+		provinces_to_highlight = {
+			pontic_greek_culture_region = yes 
+		}
+
+		allow = {
+			always = no
+		}
+
+		effect = {
+			#Pass
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	cappadocian_homelands = {
+		major = no
+		potential = {
+			AND = {
+				culture_group = byzantine
+				NOT = { has_global_flag = rhomaio_formed_flag }
+			}
+			has_global_flag = homelands_shown_flag
+			has_global_flag = hellenic_cappadocia_settlement_flag
+		}
+
+		provinces_to_highlight = {
+			cappadocian_culture_region = yes 
+		}
+
+		allow = {
+			always = no
+		}
+
+		effect = {
+			#Pass
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	rhomaio_homelands = {
+		major = no
+		potential = {
+			AND = {
+				culture_group = byzantine
+				has_global_flag = rhomaio_formed_flag
+			}
+			has_global_flag = homelands_shown_flag
+		}
+
+		provinces_to_highlight = {
+			rhomaio_culture_region = yes 
+		}
+
+		allow = {
+			always = no
+		}
+
+		effect = {
+			#Pass
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	nkreko_armenio_homelands = {
+		major = no
+		potential = {
+			AND = {
+				culture_group = byzantine
+				has_global_flag = hellenic_armenian_assimilation_flag
+			}
+			has_global_flag = homelands_shown_flag
+		}
+
+		provinces_to_highlight = {
+			nkreko_armenio_culture_region = yes 
+		}
+
+		allow = {
+			always = no
+		}
+
+		effect = {
+			#Pass
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	alexandrian_homelands = {
+		major = no
+		potential = {
+			AND = {
+				culture_group = byzantine
+				has_global_flag = hellenic_coptic_assimilation_flag
+			}
+			has_global_flag = homelands_shown_flag
+		}
+
+		provinces_to_highlight = {
+			alexandrian_culture_region = yes 
+		}
+
+		allow = {
+			always = no
+		}
+
+		effect = {
+			#Pass
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	antiocheia_homelands = {
+		major = no
+		potential = {
+			AND = {
+				culture_group = byzantine
+				has_global_flag = hellenic_coptic_assimilation_flag
+			}
+			has_global_flag = homelands_shown_flag
+		}
+
+		provinces_to_highlight = {
+			antiocheia_culture_region = yes 
+		}
+
+		allow = {
+			always = no
+		}
+
+		effect = {
+			#Pass
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	dacion_homelands = {
+		major = no
+		potential = {
+			AND = {
+				culture_group = byzantine
+				has_global_flag = hellenic_romanian_assimilation_flag
+			}
+			has_global_flag = homelands_shown_flag
+		}
+
+		provinces_to_highlight = {
+			dacion_culture_region = yes 
+		}
+
+		allow = {
+			always = no
+		}
+
+		effect = {
+			#Pass
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}	
+	
+	italiote_homelands = {
+		major = no
+		potential = {
+			AND = {
+				culture_group = byzantine
+				has_global_flag = hellenic_north_italy_settlement_flag
+			}
+			has_global_flag = homelands_shown_flag
+		}
+
+		provinces_to_highlight = {
+			italiote_culture_region = yes 
+		}
+
+		allow = {
+			always = no
+		}
+
+		effect = {
+			#Pass
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	griko_homelands = {
+		major = no
+		potential = {
+			AND = {
+				culture_group = byzantine
+				has_global_flag = hellenic_north_italy_settlement_flag
+			}
+			has_global_flag = homelands_shown_flag
+		}
+
+		provinces_to_highlight = {
+			graiko_culture_region = yes 
+		}
+
+		allow = {
+			always = no
+		}
+
+		effect = {
+			#Pass
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	illyrion_homelands = {
+		major = no
+		potential = {
+			AND = {
+				culture_group = byzantine
+				has_global_flag = hellenic_illyria_settlement_flag
+			}
+			has_global_flag = homelands_shown_flag
+		}
+
+		provinces_to_highlight = {
+			illyrion_culture_region = yes 
+		}
+
+		allow = {
+			always = no
+		}
+
+		effect = {
+			#Pass
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}	
+	
+	kirenike_homelands = {
+		major = no
+		potential = {
+			AND = {
+				culture_group = byzantine
+				has_global_flag = hellenic_cyrenaica_settlement_flag
+			}
+			has_global_flag = homelands_shown_flag
+		}
+
+		provinces_to_highlight = {
+			kirenike_culture_region = yes 
+		}
+
+		allow = {
+			always = no
+		}
+
+		effect = {
+			#Pass
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	karchidoniac_homelands = {
+		major = no
+		potential = {
+			AND = {
+				culture_group = byzantine
+				has_global_flag = hellenic_karchidoniac_settlement_flag
+			}
+			has_global_flag = homelands_shown_flag
+		}
+
+		provinces_to_highlight = {
+			karchidoniac_culture_region = yes 
+		}
+
+		allow = {
+			always = no
+		}
+
+		effect = {
+			#Pass
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	aravikos_homelands = {
+		major = no
+		potential = {
+			AND = {
+				culture_group = byzantine
+				has_global_flag = hellenic_aravikos_settlement_flag
+			}
+			has_global_flag = homelands_shown_flag
+		}
+
+		provinces_to_highlight = {
+			aravikos_culture_region = yes 
+		}
+
+		allow = {
+			always = no
+		}
+
+		effect = {
+			#Pass
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}	
+
+	persic_homelands = {
+		major = no
+		potential = {
+			AND = {
+				culture_group = byzantine
+				has_global_flag = hellenic_persia_settlement_flag
+			}
+			has_global_flag = homelands_shown_flag
+		}
+
+		provinces_to_highlight = {
+			persic_culture_region = yes 
+		}
+
+		allow = {
+			always = no
+		}
+
+		effect = {
+			#Pass
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}	
+
+	vaktrianos_homelands = {
+		major = no
+		potential = {
+			AND = {
+				culture_group = byzantine
+				has_global_flag = hellenic_bactria_settlement_flag
+			}
+			has_global_flag = homelands_shown_flag
+		}
+
+		provinces_to_highlight = {
+			vaktrianos_culture_region = yes 
+		}
+
+		allow = {
+			always = no
+		}
+
+		effect = {
+			#Pass
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}	
+
+	indiki_koilada_homelands = {
+		major = no
+		potential = {
+			AND = {
+				culture_group = byzantine
+				has_global_flag = hellenic_west_india_settlement_flag
+			}
+			has_global_flag = homelands_shown_flag
+		}
+
+		provinces_to_highlight = {
+			indiki_koilada_culture_region = yes 
+		}
+
+		allow = {
+			always = no
+		}
+
+		effect = {
+			#Pass
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}		
+	mavritanias_homelands = {
+		major = no
+		potential = {
+			AND = {
+				culture_group = byzantine
+				has_global_flag = hellenic_mauretania_settlement_flag
+			}
+			has_global_flag = homelands_shown_flag
+		}
+
+		provinces_to_highlight = {
+			mavritanias_culture_region = yes 
+		}
+
+		allow = {
+			always = no
+		}
+
+		effect = {
+			#Pass
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}	
+	
+	massalian_homelands = {
+		major = no
+		potential = {
+			AND = {
+				culture_group = byzantine
+				has_global_flag = hellenic_west_mediterranean_settlement_flag
+			}
+			has_global_flag = homelands_shown_flag
+		}
+
+		provinces_to_highlight = {
+			massalian_culture_region = yes 
+		}
+
+		allow = {
+			always = no
+		}
+
+		effect = {
+			#Pass
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	karpessosion_homelands = {
+		major = no
+		potential = {
+			AND = {
+				culture_group = byzantine
+				has_global_flag = hellenic_south_iberia_settlement_flag
+			}
+			has_global_flag = homelands_shown_flag
+		}
+
+		provinces_to_highlight = {
+			karpessosion_culture_region = yes 
+		}
+
+		allow = {
+			always = no
+		}
+
+		effect = {
+			#Pass
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	septimanikion_homelands = {
+		major = no
+		potential = {
+			AND = {
+				culture_group = byzantine
+				has_global_flag = hellenic_north_iberia_settlement_flag
+			}
+			has_global_flag = homelands_shown_flag
+		}
+
+		provinces_to_highlight = {
+			septimanikion_culture_region = yes 
+		}
+
+		allow = {
+			always = no
+		}
+
+		effect = {
+			#Pass
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	galatian_homelands = {
+		major = no
+		potential = {
+			AND = {
+				culture_group = byzantine
+				has_global_flag = hellenic_south_france_settlement_flag
+			}
+			has_global_flag = homelands_shown_flag
+		}
+
+		provinces_to_highlight = {
+			galatian_culture_region = yes 
+		}
+
+		allow = {
+			always = no
+		}
+
+		effect = {
+			#Pass
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+
+	velgoi_homelands = {
+		major = no
+		potential = {
+			AND = {
+				culture_group = byzantine
+				has_global_flag = hellenic_north_france_settlement_flag
+			}
+			has_global_flag = homelands_shown_flag
+		}
+
+		provinces_to_highlight = {
+			velgoi_culture_region = yes 
+		}
+
+		allow = {
+			always = no
+		}
+
+		effect = {
+			#Pass
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}	
+	
+	pannonion_homelands = {
+		major = no
+		potential = {
+			AND = {
+				culture_group = byzantine
+				has_global_flag = hellenic_pannonia_settlement_flag
+			}
+			has_global_flag = homelands_shown_flag
+		}
+
+		provinces_to_highlight = {
+			pannonion_culture_region = yes 
+		}
+
+		allow = {
+			always = no
+		}
+
+		effect = {
+			#Pass
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}
+	
+	notiodytiki_germanikos_homelands = {
+		major = no
+		potential = {
+			AND = {
+				culture_group = byzantine
+				has_global_flag = hellenic_south_western_germania_settlement_flag
+			}
+			has_global_flag = homelands_shown_flag
+		}
+
+		provinces_to_highlight = {
+			notiodytiki_germanikos_culture_region = yes 
+		}
+
+		allow = {
+			always = no
+		}
+
+		effect = {
+			#Pass
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}	
+	
+	#Egyptian
+	coptic_homelands = {
+		major = no
+		potential = {
+			OR = {
+				culture_group = egyptian_group
+				AND = {
+					has_global_flag = hellenic_coptic_restoration_flag
+					NOT = { has_global_flag = hellenic_coptic_assimilation_flag }
+				}	
+			}
+			has_global_flag = homelands_shown_flag
+		}
+
+		provinces_to_highlight = {
+			coptic_culture_region = yes 
+		}
+
+		allow = {
+			always = no
+		}
+
+		effect = {
+			#Pass
+		}
+
+		ai_will_do = {
+			factor = 0
+		}
+	}		
 }
